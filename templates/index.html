@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <link type="text/css" rel="stylesheet" href="/static/css/index.css"> 
+    <title></title>
+</head>
+<body>
+    <h1>영화 리뷰 감성 평가</h1>
+    <a href="/fit">모델학습</a> / 학습결과점수:{{score}}<br/>
+    <select class='select-movie' onchange='selectBoxChange(this.value)'>
+        <option>현재 상영작</option>
+        <option value="207927">레벤느망</option>
+        <option value="210029">그 남자는 타이타닉을 보고 싶지 않았다</option>
+        <option value="190991">이상한 나라의 수학자</option>
+        <option value="214613">블랙라이트</option>
+        <option value="214690">나의 히어로 아카데미아 더 무비: 월드 히어로즈 미션</option>
+        <option value="213563">극장판 금빛 모자이크: 땡큐!!</option>
+        <option value="209727">소피의 세계</option>
+        <option value="202759">나이트 레이더스</option>
+        <option value="154282">더 배트맨</option>
+        <option value="213567">에우리디체</option>
+        <option value="188995">우리가 사랑이라고 믿는 것</option>
+        <option value="193042">축복의 집</option>
+        <option value="189118">광대: 소리꾼</option>
+        <option value="146418">매미소리</option>
+        <option value="196763">안테벨룸</option>
+        <option value="197668">인민을 위해 복무하라</option>
+        <option value="192143">나이트메어 앨리</option>
+        <option value="208558">시라노</option>
+        <option value="206988">피그</option>
+        <option value="194668">보드랍게</option>
+        <option value="213733">극장판 주술회전 0</option>
+        <option value="212140">극장판 바다 탐험대 옥토넛 : 해저동굴 대탈출</option>
+        <option value="213624">전투왕</option>
+        <option value="80737">언차티드</option>
+        <option value="212656">리코리쉬 피자</option>
+        <option value="191652">나의 촛불</option>
+        <option value="198625">온 세상이 하얗다</option>
+        <option value="191559">듄</option>
+        <option value="206024">만년이 지나도 변하지 않는 게 있어</option>
+        <option value="191547">나일 강의 죽음</option>
+        <option value="208821">극장판 안녕 자두야: 제주도의 비밀</option>
+        <option value="177366">킹메이커</option>
+        <option value="194204">해적: 도깨비 깃발</option>
+        <option value="194813">어나더 라운드</option>
+        <option value="200892">하우스 오브 구찌</option>
+        <option value="187320">씽2게더</option>
+        <option value="205623">드라이브 마이 카</option>
+        <option value="208077">스파이더맨: 노 웨이 홈</option>
+        <option value="193857">파워 오브 도그</option>
+        <option value="201073">코다</option>
+        <option value="133228">카르멘</option>
+        <option value="28876">화양연화</option>
+        <option value="10563">웨스트 사이드 스토리</option>
+    </select>
+
+    <div class='search-result off'>
+        <div id='table'></div>
+    </div>
+</body>
+<script>
+var selectBoxChange = function(value) {
+    if (value == '현재 상영작') {
+        $('#table').html('')
+        $('.search-result').addClass('off') 
+        return;
+    }
+    var data = { 'search': value }
+    $.ajax({
+        type: 'post',
+        url: "{{url_for('review_action')}}",
+        datatype: 'text',
+        contentType: "application/json",
+        data: JSON.stringify(data), 
+        success: function (data) {
+            $('.search-result').removeClass('off')
+            var data_result = JSON.parse(data.result);
+            $('#table').html('')
+            $('#table').append(drawingSearchList(data_result))
+        }
+    })
+}
+
+function drawingSearchList(data_result) {
+	var addTag = ""
+    addTag += "<div class='col'>날짜</div>"
+        + "<div class='col'>작성자</div>"
+        + "<div class='col'>감상평</div>"
+        + "<div class='col'>평점</div>"
+        + "<div class='col'>긍정/부정</div>"
+	$.each(data_result, function(index, data){
+        var searchData = String(data).split('|')
+		addTag += "<div class='text' style='grid-column: 1/2;'>" + searchData[0] + "</div>"
+                + "<div class='text' style='grid-column: 2/3;'>" + searchData[1] + "</div>"
+                + "<div class='text' style='grid-column: 3/4;'>" + searchData[2] + "</div>"
+                + "<div class='text' style='grid-column: 4/5;'>" + searchData[3] + "</div>"
+                + "<div class='text' style='grid-column: 5/6;'>" + searchData[3] + "</div>"
+    })
+    return addTag;
+}
+</script>
+</html>

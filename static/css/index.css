@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+select {
+    margin-top: 20px;
+    width: 400px;                                                
+    padding: .8em .5em;                                        
+    border: 1px solid #999;
+    font-family: inherit;                                         
+    border-radius: 5px;                                         
+    -webkit-appearance: none;                              
+    -moz-appearance: none;
+    appearance: none;
+    margin-right: 20px;
+}
+      
+select::-ms-expand {                                       
+    display: none;
+}
+
+.off {
+    display: none;
+}
+
+#table {
+    display: grid;  
+    width: 1000px; 
+    margin-top: 20px;
+    grid-template-columns: 13% 13% 50% 10% 14%; 
+}
+
+.col { 
+    background-color: #e8e8e8; 
+    font-weight: bolder; 
+    vertical-align: middle; 
+    font-size: 13pt;
+}
+
+#table > div {
+    padding: 13px;
+    border-bottom: 1px solid #ccc;
+}
