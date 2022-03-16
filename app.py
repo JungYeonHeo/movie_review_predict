@@ -21,8 +21,10 @@ def review_action():
     data = json.loads(request.data)
     search =  data.get('search')
     df = s.getMovieReviews(search)
-    res = df.values.tolist()
-    print(res)
+    res = []
+    data_list = df.values.tolist()
+    for d in data_list:
+        res.append(Review(date=d[0], writer=d[1], review=d[2], rating=d[3], type=d[5]))
     return jsonify(result=json.dumps(res, default=str))
 
 if __name__ == "__main__": 

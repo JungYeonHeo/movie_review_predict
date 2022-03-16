@@ -104,9 +104,12 @@ class ReviewService: # 학습, 평가
         return 'positive' if pred == 1 else 'negative'
         
     def getMovieReviews(self, sword):       
-        date_list = writer_list = review_list = rating_list = []
+        date_list = []
+        writer_list = [] 
+        review_list = []
+        rating_list = []
         
-        for page in range(1, 11):
+        for page in range(1, 5):
             url = 'https://movie.naver.com/movie/point/af/list.naver?st=mcode&target=after'
             url += '&sword=' + str(sword) 
             url += '&page=' + str(page)
@@ -139,10 +142,10 @@ class ReviewService: # 학습, 평가
 
             except Exception as e:
                 pass
-            
+        
         data = pd.DataFrame(list(zip(date_list, writer_list, review_list, rating_list)), 
                 columns = ['date', 'writer', 'review', 'rating'])
-        
+
         df = self.review_pred(data, 'static/movie_review_type.pkl')  
         df['pred_type'] = df['pred'].apply(self.type_change) 
         
@@ -151,5 +154,4 @@ class ReviewService: # 학습, 평가
     
 if __name__ == "__main__": 
     s = ReviewService()
-    s.review_fit()
     res = s.getMovieReviews(189559) 
