@@ -218,13 +218,3 @@ def review_action():
 
 - 아래와 같은 결과를 볼 수 있다.
 ![평가](https://user-images.githubusercontent.com/94504613/184296494-175e545a-f23e-4b40-b68a-63e20ebc2d32.png)
-=======
-# movie_review_genre_predict
-flask 영화 리뷰 감정 분석 웹사이트 
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> e3486706ada5bf69e5ca4ff734357ef6e262fb57
-=======
->>>>>>> e3486706ada5bf69e5ca4ff734357ef6e262fb57
->>>>>>> Stashed changes
