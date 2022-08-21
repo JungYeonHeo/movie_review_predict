@@ -132,7 +132,7 @@ class ReviewService: # 학습, 평가
         return 'positive' if pred == 1 else 'negative'
 ```
 
-- 아래와 같은 결과가 나온다.
+- 아래와 같은 결과가 나온다.  
 ![모델학습](https://user-images.githubusercontent.com/94504613/184296490-00e4a155-ca7c-4381-b82a-5f9c9db60754.png)
 
 <br>
@@ -147,7 +147,6 @@ class ReviewService: # 학습, 평가
 
 ```python
 class ReviewService:
-  # ...
   def getMovieReviews(self, sword):       
       date_list = []
       writer_list = [] 
@@ -216,5 +215,5 @@ def review_action():
     return jsonify(result=json.dumps(res, default=str))
 ```
 
-- 아래와 같은 결과를 볼 수 있다.
+- 아래와 같은 결과를 볼 수 있다.  
 ![평가](https://user-images.githubusercontent.com/94504613/184296494-175e545a-f23e-4b40-b68a-63e20ebc2d32.png)
